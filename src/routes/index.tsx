@@ -55,7 +55,7 @@ function Index() {
   return (
     <main className="overflow-x-hidden">
       {/* Nav — deliberately minimal */}
-      <header className="fixed inset-x-0 top-0 z-50">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-border/30 bg-background/50 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10">
           <span className="font-display text-2xl tracking-tight">Buildohub</span>
           <a
