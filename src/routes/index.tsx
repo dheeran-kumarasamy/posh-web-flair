@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import heroImg from "@/assets/hero.jpg";
 import materialsImg from "@/assets/materials.jpg";
 
@@ -36,28 +37,76 @@ const ticker = [
 const chapters = [
   {
     n: "01",
+    id: "discover",
     title: "Discover",
     body: "A living index of material prices, updated through the day from suppliers who actually deliver.",
   },
   {
     n: "02",
+    id: "decide",
     title: "Decide",
     body: "Compare landed cost, lead time and grade side by side. No calls, no chasing, no guesswork.",
   },
   {
     n: "03",
+    id: "deliver",
     title: "Deliver",
     body: "Place the order and follow it to site — dispatch, weighbridge, gate entry, all in one thread.",
   },
 ];
 
 function Index() {
+  const [active, setActive] = useState<string | null>(null);
+
+  useEffect(() => {
+    const targets = chapters
+      .map((c) => document.getElementById(c.id))
+      .filter((el): el is HTMLElement => Boolean(el));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive(visible.target.id);
+      },
+      { rootMargin: "-40% 0px -40% 0px", threshold: [0.15, 0.5, 0.85] },
+    );
+    targets.forEach((t) => observer.observe(t));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <main className="overflow-x-hidden">
       {/* Nav — deliberately minimal */}
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border/30 bg-background/50 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10">
           <span className="font-display text-2xl tracking-tight">Buildohub</span>
+          <nav aria-label="Chapters" className="hidden items-center gap-5 sm:flex">
+            {chapters.map((c) => (
+              <a
+                key={c.id}
+                href={`#${c.id}`}
+                aria-label={`Jump to ${c.title}`}
+                aria-current={active === c.id ? "true" : undefined}
+                className="group flex items-center gap-2 text-xs tracking-[0.25em] uppercase"
+              >
+                <span
+                  className={`h-1.5 w-1.5 rounded-full transition-all duration-500 ${
+                    active === c.id
+                      ? "scale-125 bg-primary"
+                      : "bg-muted-foreground/50 group-hover:bg-primary/70"
+                  }`}
+                />
+                <span
+                  className={`transition-colors duration-500 ${
+                    active === c.id ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
+                  }`}
+                >
+                  {c.n}
+                </span>
+              </a>
+            ))}
+          </nav>
           <a
             href="#enquire"
             className="rounded-full border border-border/80 bg-background/40 px-5 py-2 text-sm backdrop-blur-md transition-colors hover:bg-primary hover:text-primary-foreground"
@@ -134,7 +183,8 @@ function Index() {
           {chapters.map((c) => (
             <article
               key={c.n}
-              className="group bg-background p-10 transition-colors duration-500 hover:bg-card md:p-12"
+              id={c.id}
+              className="group scroll-mt-28 bg-background p-10 transition-colors duration-500 hover:bg-card md:p-12"
             >
               <span className="text-xs tracking-[0.3em] text-primary">{c.n}</span>
               <h3 className="mt-8 text-3xl">{c.title}</h3>
