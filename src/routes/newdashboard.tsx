@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { Bell, ShoppingCart } from "lucide-react";
 
 export const Route = createFileRoute("/newdashboard")({
   head: () => ({
@@ -66,6 +67,31 @@ function NewDashboard() {
       />
 
       <div className="relative flex flex-1 flex-col px-6 py-6 md:px-10 md:py-8">
+        <div className="mb-6 flex items-center justify-between gap-4">
+          <span className="font-display text-2xl tracking-tight md:text-3xl">
+            Buildo<span className="text-primary">hub</span>
+          </span>
+          <div className="flex items-center gap-2">
+            <button
+              aria-label="Alerts"
+              className="flex items-center gap-2 rounded-full border border-border/70 bg-background/30 px-4 py-2 text-sm text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground"
+            >
+              <Bell className="size-4" />
+              <span className="hidden sm:inline">Alerts</span>
+              <span className="ml-1 rounded-full bg-primary px-1.5 text-xs text-primary-foreground">3</span>
+            </button>
+            <button
+              aria-label="Cart"
+              className="relative rounded-full border border-border/70 bg-background/30 p-2.5 text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground"
+            >
+              <ShoppingCart className="size-4" />
+              <span className="absolute -right-1 -top-1 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] text-primary-foreground">
+                2
+              </span>
+            </button>
+          </div>
+        </div>
+
         <nav className="flex flex-wrap items-center gap-2">
           {views.map((v) => (
             <button
