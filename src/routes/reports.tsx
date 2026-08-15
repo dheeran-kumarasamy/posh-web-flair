@@ -171,6 +171,7 @@ const siteWise = [
 
 function Reports() {
   const [open, setOpen] = useState<string | null>(null);
+  const [site, setSite] = useState(0);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(null);
@@ -179,58 +180,70 @@ function Reports() {
   }, []);
 
   const active = reports.find((r) => r.id === open);
+  const s = siteWise[site] ?? siteWise[0]!;
 
   return (
-    <main className="relative flex min-h-screen flex-col overflow-hidden">
+    <main className="relative flex h-screen flex-col overflow-hidden">
       <div
         className="pointer-events-none absolute inset-0 -z-10"
         style={{ background: "var(--gradient-warm)" }}
       />
 
-      <div className="relative mx-auto w-full max-w-6xl px-6 py-10 md:px-10 md:py-16">
-        <header className="flex items-baseline justify-between gap-4">
-          <h1 className="font-display text-4xl tracking-tight md:text-5xl">Reports</h1>
-          <span className="hidden text-xs uppercase tracking-[0.3em] text-muted-foreground md:inline">
+      <div className="relative flex flex-1 flex-col px-6 py-6 md:px-10 md:py-8">
+        <div className="mb-6 flex items-center justify-between gap-4">
+          <span className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
+            Buildo<span className="text-primary">hub</span>
+          </span>
+          <span className="hidden text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground md:inline">
             Procurement desk
           </span>
-        </header>
+        </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {reports.map((r) => (
+        <section className="rise flex flex-1 flex-col rounded-4xl border border-border/60 bg-background/40 p-6 backdrop-blur-xl md:p-10">
+          <header className="mb-8 flex items-baseline justify-between">
+            <h1 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">Reports</h1>
+            <span className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground">
+              {reports.length + 1} views
+            </span>
+          </header>
+
+          <div className="grid flex-1 content-start gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {reports.map((r) => (
+              <button
+                key={r.id}
+                onClick={() => setOpen(r.id)}
+                className="rounded-3xl border border-border/60 bg-card/60 px-6 py-7 text-left font-display text-xl font-semibold leading-tight backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-primary hover:text-primary"
+                style={{ boxShadow: "var(--shadow-lift)" }}
+              >
+                {r.name}
+              </button>
+            ))}
+
             <button
-              key={r.id}
-              onClick={() => setOpen(r.id)}
-              className="rounded-3xl border border-border/60 bg-card/60 px-7 py-8 text-left font-display text-2xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-primary hover:text-primary"
+              onClick={() => setOpen("site-wise")}
+              className="rounded-3xl border border-primary/70 bg-primary/10 px-6 py-7 text-left font-display text-xl font-semibold leading-tight text-primary backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground"
               style={{ boxShadow: "var(--shadow-lift)" }}
             >
-              {r.name}
+              Site-wise Report
             </button>
-          ))}
-
-          <button
-            onClick={() => setOpen("site-wise")}
-            className="rounded-3xl border border-primary/70 bg-primary/10 px-7 py-8 text-left font-display text-2xl text-primary backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground"
-            style={{ boxShadow: "var(--shadow-lift)" }}
-          >
-            Site-wise Report
-          </button>
-        </div>
+          </div>
+        </section>
       </div>
 
       {open && (
         <div
-          className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-background/70 p-4 backdrop-blur-md md:p-10"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-background/70 p-4 backdrop-blur-md md:p-10"
           onClick={() => setOpen(null)}
           role="dialog"
           aria-modal="true"
         >
           <section
             onClick={(e) => e.stopPropagation()}
-            className="rise w-full max-w-5xl rounded-4xl border border-border/60 bg-card/90 p-7 backdrop-blur-xl md:p-10"
+            className="rise flex max-h-full w-full max-w-5xl flex-col rounded-4xl border border-border/60 bg-card/90 p-7 backdrop-blur-xl md:p-10"
             style={{ boxShadow: "var(--shadow-lift)" }}
           >
             <div className="flex items-start justify-between gap-6">
-              <h2 className="font-display text-3xl tracking-tight md:text-4xl">
+              <h2 className="font-display text-3xl font-semibold tracking-tight md:text-4xl">
                 {active ? active.name : "Site-wise Report"}
               </h2>
               <button
@@ -244,12 +257,12 @@ function Reports() {
 
             {active ? (
               <>
-                <div className="mt-8 overflow-x-auto">
+                <div className="mt-8 overflow-auto">
                   <table className="w-full text-left text-sm">
-                    <thead className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                    <thead className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
                       <tr>
                         {active.table.head.map((h) => (
-                          <th key={h} className="border-b border-border/60 pb-3 pr-6 font-normal">
+                          <th key={h} className="border-b border-border/60 pb-3 pr-6 font-medium">
                             {h}
                           </th>
                         ))}
@@ -261,8 +274,8 @@ function Reports() {
                           {row.map((c, i) => (
                             <td
                               key={i}
-                              className={`border-b border-border/40 py-4 pr-6 ${
-                                i === 0 ? "" : "text-muted-foreground"
+                              className={`border-b border-border/40 py-3.5 pr-6 ${
+                                i === 0 ? "font-medium" : "text-muted-foreground"
                               }`}
                             >
                               {c}
@@ -274,60 +287,68 @@ function Reports() {
                   </table>
                 </div>
                 {active.footer && (
-                  <p className="mt-6 text-xs text-muted-foreground">{active.footer}</p>
+                  <p className="mt-6 text-xs font-medium text-muted-foreground">{active.footer}</p>
                 )}
               </>
             ) : (
-              <div className="mt-8 space-y-6">
-                {siteWise.map((s) => (
-                  <article key={s.code} className="rounded-3xl border border-border/60 bg-background/40 p-6 md:p-8">
-                    <div className="flex flex-wrap items-baseline justify-between gap-3">
-                      <h3 className="font-display text-2xl">{s.site}</h3>
-                      <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
-                        {s.code} · {s.orders} orders
-                      </span>
-                    </div>
+              <div className="mt-6 flex min-h-0 flex-1 flex-col">
+                <nav className="flex flex-wrap gap-2">
+                  {siteWise.map((x, i) => (
+                    <button
+                      key={x.code}
+                      onClick={() => setSite(i)}
+                      className={`rounded-full border px-5 py-2 text-sm font-medium transition-all duration-300 ${
+                        i === site
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border/70 bg-background/30 text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      {x.site}
+                    </button>
+                  ))}
+                </nav>
 
-                    <div className="mt-5 grid gap-4 sm:grid-cols-3">
-                      {[
-                        ["Budget", s.budget],
-                        ["Spent to date", s.spent],
-                        ["Budget used", s.used],
-                      ].map(([k, v]) => (
-                        <div key={k}>
-                          <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">{k}</p>
-                          <p className="mt-2 font-display text-2xl text-primary">{v}</p>
-                        </div>
+                <div className="mt-6 grid gap-4 sm:grid-cols-4">
+                  {[
+                    ["Budget", s.budget],
+                    ["Spent to date", s.spent],
+                    ["Budget used", s.used],
+                    ["Orders", String(s.orders)],
+                  ].map(([k, v]) => (
+                    <div key={k} className="rounded-3xl border border-border/60 bg-background/40 p-5">
+                      <p className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground">
+                        {k}
+                      </p>
+                      <p className="mt-3 font-display text-2xl font-semibold text-primary">{v}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-6 min-h-0 flex-1 overflow-auto">
+                  <table className="w-full text-left text-sm">
+                    <thead className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                      <tr>
+                        {["Material", "Quantity", "Value", "Supplier"].map((h) => (
+                          <th key={h} className="border-b border-border/60 pb-3 pr-6 font-medium">
+                            {h}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {s.lines.map((l) => (
+                        <tr key={l[0]} className="transition-colors hover:bg-background/40">
+                          <td className="border-b border-border/40 py-3.5 pr-6 font-medium">{l[0]}</td>
+                          <td className="border-b border-border/40 py-3.5 pr-6 text-muted-foreground">{l[1]}</td>
+                          <td className="border-b border-border/40 py-3.5 pr-6 font-display text-base font-semibold text-primary">
+                            {l[2]}
+                          </td>
+                          <td className="border-b border-border/40 py-3.5 text-muted-foreground">{l[3]}</td>
+                        </tr>
                       ))}
-                    </div>
-
-                    <div className="mt-6 overflow-x-auto">
-                      <table className="w-full text-left text-sm">
-                        <thead className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                          <tr>
-                            {["Material", "Quantity", "Value", "Supplier"].map((h) => (
-                              <th key={h} className="border-b border-border/60 pb-3 pr-6 font-normal">
-                                {h}
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {s.lines.map((l) => (
-                            <tr key={l[0]}>
-                              <td className="border-b border-border/40 py-3 pr-6">{l[0]}</td>
-                              <td className="border-b border-border/40 py-3 pr-6 text-muted-foreground">{l[1]}</td>
-                              <td className="border-b border-border/40 py-3 pr-6 font-display text-base text-primary">
-                                {l[2]}
-                              </td>
-                              <td className="border-b border-border/40 py-3 text-muted-foreground">{l[3]}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  </article>
-                ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             )}
           </section>
