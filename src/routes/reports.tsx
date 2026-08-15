@@ -180,7 +180,7 @@ function Reports() {
   }, []);
 
   const active = reports.find((r) => r.id === open);
-  const s = siteWise[site];
+  const s = siteWise[site] ?? siteWise[0]!;
 
   return (
     <main className="relative flex h-screen flex-col overflow-hidden">
