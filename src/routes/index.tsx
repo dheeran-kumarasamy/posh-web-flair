@@ -249,9 +249,73 @@ function Index() {
         </div>
       </section>
 
-      <footer className="mx-auto flex max-w-7xl flex-col justify-between gap-4 px-6 py-10 text-sm text-muted-foreground md:flex-row md:px-10">
-        <span className="font-display text-lg text-foreground">Buildohub</span>
-        <span>© {new Date().getFullYear()} Buildohub · Bengaluru, India</span>
+      <footer className="border-t border-border/60">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:px-10">
+          <div className="grid gap-10 md:grid-cols-5">
+            <div className="md:col-span-2">
+              <span className="font-display text-2xl text-foreground">Buildohub</span>
+              <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
+                A procurement platform for construction materials — transparent prices, verified
+                suppliers and deliveries tracked to site.
+              </p>
+              <address className="mt-6 space-y-1 text-sm not-italic text-muted-foreground">
+                <div>Buildohub Technologies Pvt. Ltd.</div>
+                <div>Indiranagar, Bengaluru, Karnataka 560038</div>
+                <div>
+                  <a href="tel:+918000000000" className="hover:text-foreground">
+                    +91 80000 00000
+                  </a>
+                </div>
+                <div>
+                  <a href="mailto:hello@buildohub.in" className="hover:text-foreground">
+                    hello@buildohub.in
+                  </a>
+                </div>
+              </address>
+            </div>
+
+            {[
+              {
+                title: "Materials",
+                links: ["Cement", "TMT & Steel", "Aggregates & Sand", "AAC Blocks", "Plywood"],
+              },
+              {
+                title: "Company",
+                links: ["About us", "Careers", "Newsroom", "Contact us", "Investors"],
+              },
+              {
+                title: "Resources",
+                links: [
+                  "Price index",
+                  "Supplier onboarding",
+                  "Help centre",
+                  "Privacy policy",
+                  "Terms of use",
+                ],
+              },
+            ].map((col) => (
+              <nav key={col.title} aria-label={col.title}>
+                <h3 className="text-sm font-semibold tracking-wide text-foreground">
+                  {col.title}
+                </h3>
+                <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
+                  {col.links.map((l) => (
+                    <li key={l}>
+                      <a href="#enquire" className="transition-colors hover:text-foreground">
+                        {l}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ))}
+          </div>
+
+          <div className="mt-12 flex flex-col justify-between gap-3 border-t border-border/60 pt-6 text-sm text-muted-foreground md:flex-row">
+            <span>© {new Date().getFullYear()} Buildohub · Bengaluru, India</span>
+            <span>CIN: U74999KA2026PTC000000 · GSTIN: 29AAACB0000A1Z5</span>
+          </div>
+        </div>
       </footer>
     </main>
   );
