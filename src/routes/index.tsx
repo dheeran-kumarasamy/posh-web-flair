@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Search } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import materialsImg from "@/assets/materials.jpg";
 
@@ -56,15 +57,55 @@ function Index() {
     <main className="overflow-x-hidden">
       {/* Nav — deliberately minimal */}
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border/30 bg-background/50 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10">
+        <div className="mx-auto flex max-w-7xl items-center gap-4 px-6 py-5 md:gap-8 md:px-10">
           <span className="font-display text-2xl tracking-tight">Buildohub</span>
-          <a
-            href="#enquire"
-            className="rounded-full border border-border/80 bg-background/40 px-5 py-2 text-sm backdrop-blur-md transition-colors hover:bg-primary hover:text-primary-foreground"
+          <form
+            role="search"
+            onSubmit={(e) => e.preventDefault()}
+            className="relative hidden flex-1 md:block"
           >
-            Request access
-          </a>
+            <Search
+              aria-hidden
+              className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+            />
+            <input
+              type="search"
+              aria-label="Search materials, suppliers or grades"
+              placeholder="Search cement, TMT bars, aggregates, suppliers…"
+              className="w-full rounded-full border border-border/70 bg-background/40 py-2.5 pl-11 pr-4 text-sm outline-none backdrop-blur-md transition-colors placeholder:text-muted-foreground/70 focus:border-primary/60"
+            />
+          </form>
+          <div className="ml-auto flex items-center gap-2 md:ml-0">
+            <a
+              href="#enquire"
+              className="hidden rounded-full border border-border/80 bg-background/40 px-5 py-2 text-sm backdrop-blur-md transition-colors hover:bg-accent sm:inline-flex"
+            >
+              Request access
+            </a>
+            <a
+              href="#enquire"
+              className="rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+            >
+              Get Quote
+            </a>
+          </div>
         </div>
+        <form
+          role="search"
+          onSubmit={(e) => e.preventDefault()}
+          className="relative px-6 pb-4 md:hidden"
+        >
+          <Search
+            aria-hidden
+            className="pointer-events-none absolute left-10 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+          />
+          <input
+            type="search"
+            aria-label="Search materials, suppliers or grades"
+            placeholder="Search materials or suppliers…"
+            className="w-full rounded-full border border-border/70 bg-background/40 py-2.5 pl-11 pr-4 text-sm outline-none backdrop-blur-md placeholder:text-muted-foreground/70 focus:border-primary/60"
+          />
+        </form>
       </header>
 
       {/* Hero */}
@@ -99,7 +140,7 @@ function Index() {
               href="#enquire"
               className="inline-flex w-fit items-center gap-3 rounded-full bg-primary px-8 py-4 text-sm text-primary-foreground transition-transform duration-500 hover:translate-x-1"
             >
-              Begin <span aria-hidden>→</span>
+              Get Quote <span aria-hidden>→</span>
             </a>
           </div>
         </div>
@@ -208,9 +249,73 @@ function Index() {
         </div>
       </section>
 
-      <footer className="mx-auto flex max-w-7xl flex-col justify-between gap-4 px-6 py-10 text-sm text-muted-foreground md:flex-row md:px-10">
-        <span className="font-display text-lg text-foreground">Buildohub</span>
-        <span>© {new Date().getFullYear()} Buildohub · Bengaluru, India</span>
+      <footer className="border-t border-border/60">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:px-10">
+          <div className="grid gap-10 md:grid-cols-5">
+            <div className="md:col-span-2">
+              <span className="font-display text-2xl text-foreground">Buildohub</span>
+              <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
+                A procurement platform for construction materials — transparent prices, verified
+                suppliers and deliveries tracked to site.
+              </p>
+              <address className="mt-6 space-y-1 text-sm not-italic text-muted-foreground">
+                <div>Buildohub Technologies Pvt. Ltd.</div>
+                <div>Indiranagar, Bengaluru, Karnataka 560038</div>
+                <div>
+                  <a href="tel:+918000000000" className="hover:text-foreground">
+                    +91 80000 00000
+                  </a>
+                </div>
+                <div>
+                  <a href="mailto:hello@buildohub.in" className="hover:text-foreground">
+                    hello@buildohub.in
+                  </a>
+                </div>
+              </address>
+            </div>
+
+            {[
+              {
+                title: "Materials",
+                links: ["Cement", "TMT & Steel", "Aggregates & Sand", "AAC Blocks", "Plywood"],
+              },
+              {
+                title: "Company",
+                links: ["About us", "Careers", "Newsroom", "Contact us", "Investors"],
+              },
+              {
+                title: "Resources",
+                links: [
+                  "Price index",
+                  "Supplier onboarding",
+                  "Help centre",
+                  "Privacy policy",
+                  "Terms of use",
+                ],
+              },
+            ].map((col) => (
+              <nav key={col.title} aria-label={col.title}>
+                <h3 className="text-sm font-semibold tracking-wide text-foreground">
+                  {col.title}
+                </h3>
+                <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
+                  {col.links.map((l) => (
+                    <li key={l}>
+                      <a href="#enquire" className="transition-colors hover:text-foreground">
+                        {l}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ))}
+          </div>
+
+          <div className="mt-12 flex flex-col justify-between gap-3 border-t border-border/60 pt-6 text-sm text-muted-foreground md:flex-row">
+            <span>© {new Date().getFullYear()} Buildohub · Bengaluru, India</span>
+            <span>CIN: U74999KA2026PTC000000 · GSTIN: 29AAACB0000A1Z5</span>
+          </div>
+        </div>
       </footer>
     </main>
   );
