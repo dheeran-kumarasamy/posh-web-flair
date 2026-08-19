@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Search } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import materialsImg from "@/assets/materials.jpg";
 
