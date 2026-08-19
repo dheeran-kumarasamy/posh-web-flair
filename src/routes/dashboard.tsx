@@ -86,7 +86,7 @@ function Dashboard() {
   }, []);
 
   return (
-    <main className="relative min-h-screen overflow-hidden">
+    <main className="portal relative min-h-screen overflow-hidden">
       <div
         className="pointer-events-none absolute inset-0"
         style={{ background: "var(--gradient-warm)" }}

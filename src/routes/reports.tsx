@@ -183,7 +183,7 @@ function Reports() {
   const s = siteWise[site] ?? siteWise[0]!;
 
   return (
-    <main className="relative flex h-screen flex-col overflow-hidden">
+    <main className="portal relative flex h-screen flex-col overflow-hidden">
       <div
         className="pointer-events-none absolute inset-0 -z-10"
         style={{ background: "var(--gradient-warm)" }}
