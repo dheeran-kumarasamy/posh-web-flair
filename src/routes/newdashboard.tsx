@@ -60,7 +60,7 @@ function NewDashboard() {
   const [view, setView] = useState<View>("Outstanding");
 
   return (
-    <main className="relative flex min-h-screen flex-col overflow-hidden">
+    <main className="portal relative flex min-h-screen flex-col overflow-hidden">
       <div
         className="pointer-events-none absolute inset-0 -z-10"
         style={{ background: "var(--gradient-warm)" }}
