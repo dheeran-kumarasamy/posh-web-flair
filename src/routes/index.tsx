@@ -57,15 +57,55 @@ function Index() {
     <main className="overflow-x-hidden">
       {/* Nav — deliberately minimal */}
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border/30 bg-background/50 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10">
+        <div className="mx-auto flex max-w-7xl items-center gap-4 px-6 py-5 md:gap-8 md:px-10">
           <span className="font-display text-2xl tracking-tight">Buildohub</span>
-          <a
-            href="#enquire"
-            className="rounded-full border border-border/80 bg-background/40 px-5 py-2 text-sm backdrop-blur-md transition-colors hover:bg-primary hover:text-primary-foreground"
+          <form
+            role="search"
+            onSubmit={(e) => e.preventDefault()}
+            className="relative hidden flex-1 md:block"
           >
-            Request access
-          </a>
+            <Search
+              aria-hidden
+              className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+            />
+            <input
+              type="search"
+              aria-label="Search materials, suppliers or grades"
+              placeholder="Search cement, TMT bars, aggregates, suppliers…"
+              className="w-full rounded-full border border-border/70 bg-background/40 py-2.5 pl-11 pr-4 text-sm outline-none backdrop-blur-md transition-colors placeholder:text-muted-foreground/70 focus:border-primary/60"
+            />
+          </form>
+          <div className="ml-auto flex items-center gap-2 md:ml-0">
+            <a
+              href="#enquire"
+              className="hidden rounded-full border border-border/80 bg-background/40 px-5 py-2 text-sm backdrop-blur-md transition-colors hover:bg-accent sm:inline-flex"
+            >
+              Request access
+            </a>
+            <a
+              href="#enquire"
+              className="rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+            >
+              Get Quote
+            </a>
+          </div>
         </div>
+        <form
+          role="search"
+          onSubmit={(e) => e.preventDefault()}
+          className="relative px-6 pb-4 md:hidden"
+        >
+          <Search
+            aria-hidden
+            className="pointer-events-none absolute left-10 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+          />
+          <input
+            type="search"
+            aria-label="Search materials, suppliers or grades"
+            placeholder="Search materials or suppliers…"
+            className="w-full rounded-full border border-border/70 bg-background/40 py-2.5 pl-11 pr-4 text-sm outline-none backdrop-blur-md placeholder:text-muted-foreground/70 focus:border-primary/60"
+          />
+        </form>
       </header>
 
       {/* Hero */}
@@ -100,7 +140,7 @@ function Index() {
               href="#enquire"
               className="inline-flex w-fit items-center gap-3 rounded-full bg-primary px-8 py-4 text-sm text-primary-foreground transition-transform duration-500 hover:translate-x-1"
             >
-              Begin <span aria-hidden>→</span>
+              Get Quote <span aria-hidden>→</span>
             </a>
           </div>
         </div>
