@@ -23,6 +23,9 @@
   --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
   --color-cream: var(--cream);
   --color-cream-foreground: var(--cream-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
