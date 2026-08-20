@@ -11,8 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as MaterialsRouteImport } from './routes/materials'
 import { Route as NewdashboardRouteImport } from './routes/newdashboard'
+import { Route as PricesRouteImport } from './routes/prices'
 import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as SuppliersRouteImport } from './routes/suppliers'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -24,9 +27,19 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MaterialsRoute = MaterialsRouteImport.update({
+  id: '/materials',
+  path: '/materials',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NewdashboardRoute = NewdashboardRouteImport.update({
   id: '/newdashboard',
   path: '/newdashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricesRoute = PricesRouteImport.update({
+  id: '/prices',
+  path: '/prices',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReportsRoute = ReportsRouteImport.update({
@@ -34,39 +47,78 @@ const ReportsRoute = ReportsRouteImport.update({
   path: '/reports',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SuppliersRoute = SuppliersRouteImport.update({
+  id: '/suppliers',
+  path: '/suppliers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/materials': typeof MaterialsRoute
   '/newdashboard': typeof NewdashboardRoute
+  '/prices': typeof PricesRoute
   '/reports': typeof ReportsRoute
+  '/suppliers': typeof SuppliersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/materials': typeof MaterialsRoute
   '/newdashboard': typeof NewdashboardRoute
+  '/prices': typeof PricesRoute
   '/reports': typeof ReportsRoute
+  '/suppliers': typeof SuppliersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/materials': typeof MaterialsRoute
   '/newdashboard': typeof NewdashboardRoute
+  '/prices': typeof PricesRoute
   '/reports': typeof ReportsRoute
+  '/suppliers': typeof SuppliersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/newdashboard' | '/reports'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/materials'
+    | '/newdashboard'
+    | '/prices'
+    | '/reports'
+    | '/suppliers'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/newdashboard' | '/reports'
-  id: '__root__' | '/' | '/dashboard' | '/newdashboard' | '/reports'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/materials'
+    | '/newdashboard'
+    | '/prices'
+    | '/reports'
+    | '/suppliers'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/materials'
+    | '/newdashboard'
+    | '/prices'
+    | '/reports'
+    | '/suppliers'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRoute
+  MaterialsRoute: typeof MaterialsRoute
   NewdashboardRoute: typeof NewdashboardRoute
+  PricesRoute: typeof PricesRoute
   ReportsRoute: typeof ReportsRoute
+  SuppliersRoute: typeof SuppliersRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -85,11 +137,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/materials': {
+      id: '/materials'
+      path: '/materials'
+      fullPath: '/materials'
+      preLoaderRoute: typeof MaterialsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/newdashboard': {
       id: '/newdashboard'
       path: '/newdashboard'
       fullPath: '/newdashboard'
       preLoaderRoute: typeof NewdashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prices': {
+      id: '/prices'
+      path: '/prices'
+      fullPath: '/prices'
+      preLoaderRoute: typeof PricesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reports': {
@@ -99,14 +165,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReportsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/suppliers': {
+      id: '/suppliers'
+      path: '/suppliers'
+      fullPath: '/suppliers'
+      preLoaderRoute: typeof SuppliersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
+  MaterialsRoute: MaterialsRoute,
   NewdashboardRoute: NewdashboardRoute,
+  PricesRoute: PricesRoute,
   ReportsRoute: ReportsRoute,
+  SuppliersRoute: SuppliersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

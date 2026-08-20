@@ -23,6 +23,9 @@
   --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
   --color-cream: var(--cream);
   --color-cream-foreground: var(--cream-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -88,6 +91,9 @@
   --ring: oklch(0.74 0.115 68);
   --cream: oklch(0.955 0.014 84);
   --cream-foreground: oklch(0.2 0.015 60);
+  --success: oklch(0.6 0.11 152);
+  --warning: oklch(0.72 0.12 78);
+  --danger: oklch(0.58 0.16 27);
   --gradient-warm: radial-gradient(
     110% 90% at 70% 0%,
     oklch(0.42 0.09 62 / 55%) 0%,
@@ -185,42 +191,47 @@
 }
 
 /*
- * Portal theme: every page except the homepage.
- * Same warm bronze family as the homepage, but on a very light brown base
- * with a brushed-metal sheen.
+ * Application theme: every page except the homepage.
+ * A calm, warm off-white workspace. Brown is a controlled brand accent only.
  */
 .portal {
-  --background: oklch(0.955 0.011 80);
-  --foreground: oklch(0.26 0.018 60);
-  --card: oklch(0.985 0.007 84);
-  --card-foreground: oklch(0.26 0.018 60);
-  --popover: oklch(0.985 0.007 84);
-  --popover-foreground: oklch(0.26 0.018 60);
-  --primary: oklch(0.56 0.088 62);
-  --primary-foreground: oklch(0.98 0.008 84);
-  --secondary: oklch(0.925 0.014 78);
-  --secondary-foreground: oklch(0.26 0.018 60);
-  --muted: oklch(0.925 0.014 78);
-  --muted-foreground: oklch(0.48 0.022 66);
-  --accent: oklch(0.9 0.02 74);
-  --accent-foreground: oklch(0.26 0.018 60);
-  --border: oklch(0.35 0.03 62 / 16%);
-  --input: oklch(0.35 0.03 62 / 22%);
-  --ring: oklch(0.56 0.088 62);
-  --shadow-lift: 0 30px 70px -45px oklch(0.3 0.04 60 / 45%);
-  --gradient-warm:
-    linear-gradient(
-      118deg,
-      oklch(1 0 0 / 75%) 0%,
-      oklch(0.93 0.018 76 / 60%) 22%,
-      oklch(0.985 0.008 84 / 80%) 38%,
-      oklch(0.9 0.026 70 / 55%) 58%,
-      oklch(0.975 0.01 82 / 75%) 76%,
-      oklch(0.91 0.022 72 / 60%) 100%
-    ),
-    radial-gradient(120% 90% at 72% 0%, oklch(0.78 0.06 66 / 45%) 0%, oklch(0.955 0.011 80 / 0%) 62%);
+  --radius: 0.625rem;
+  --background: oklch(0.983 0.005 84);
+  --foreground: oklch(0.24 0.012 60);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.24 0.012 60);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.24 0.012 60);
+  --primary: oklch(0.42 0.058 55);
+  --primary-foreground: oklch(0.98 0.006 84);
+  --secondary: oklch(0.955 0.008 82);
+  --secondary-foreground: oklch(0.24 0.012 60);
+  --muted: oklch(0.955 0.008 82);
+  --muted-foreground: oklch(0.54 0.012 66);
+  --accent: oklch(0.945 0.016 80);
+  --accent-foreground: oklch(0.32 0.03 58);
+  --border: oklch(0.89 0.008 78);
+  --input: oklch(0.89 0.008 78);
+  --ring: oklch(0.42 0.058 55);
+  --success: oklch(0.52 0.1 152);
+  --warning: oklch(0.62 0.11 72);
+  --danger: oklch(0.53 0.16 27);
+  --shadow-lift: 0 18px 40px -28px oklch(0.3 0.02 60 / 35%);
   background-color: var(--background);
   color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+.portal h1,
+.portal h2,
+.portal h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.portal .tnum {
+  font-variant-numeric: tabular-nums;
 }
 
 @keyframes rise {
