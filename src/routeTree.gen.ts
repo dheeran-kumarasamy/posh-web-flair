@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as MaterialsRouteImport } from './routes/materials'
 import { Route as NewdashboardRouteImport } from './routes/newdashboard'
 import { Route as ReportsRouteImport } from './routes/reports'
 
@@ -22,6 +23,11 @@ const IndexRoute = IndexRouteImport.update({
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MaterialsRoute = MaterialsRouteImport.update({
+  id: '/materials',
+  path: '/materials',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewdashboardRoute = NewdashboardRouteImport.update({
@@ -38,12 +44,14 @@ const ReportsRoute = ReportsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/materials': typeof MaterialsRoute
   '/newdashboard': typeof NewdashboardRoute
   '/reports': typeof ReportsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/materials': typeof MaterialsRoute
   '/newdashboard': typeof NewdashboardRoute
   '/reports': typeof ReportsRoute
 }
@@ -51,20 +59,28 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/materials': typeof MaterialsRoute
   '/newdashboard': typeof NewdashboardRoute
   '/reports': typeof ReportsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/newdashboard' | '/reports'
+  fullPaths: '/' | '/dashboard' | '/materials' | '/newdashboard' | '/reports'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/newdashboard' | '/reports'
-  id: '__root__' | '/' | '/dashboard' | '/newdashboard' | '/reports'
+  to: '/' | '/dashboard' | '/materials' | '/newdashboard' | '/reports'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/materials'
+    | '/newdashboard'
+    | '/reports'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRoute
+  MaterialsRoute: typeof MaterialsRoute
   NewdashboardRoute: typeof NewdashboardRoute
   ReportsRoute: typeof ReportsRoute
 }
@@ -83,6 +99,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/materials': {
+      id: '/materials'
+      path: '/materials'
+      fullPath: '/materials'
+      preLoaderRoute: typeof MaterialsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/newdashboard': {
@@ -105,6 +128,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
+  MaterialsRoute: MaterialsRoute,
   NewdashboardRoute: NewdashboardRoute,
   ReportsRoute: ReportsRoute,
 }
