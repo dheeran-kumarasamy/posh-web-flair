@@ -94,6 +94,9 @@ const whyChooseUs = {
 };
 
 function Index() {
+  const [role, setRole] = useState<"buyer" | "supplier">("buyer");
+  const activeCards = whyChooseUs[role];
+
   return (
     <main className="overflow-x-hidden">
       {/* Nav — deliberately minimal */}
