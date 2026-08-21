@@ -46,23 +46,52 @@ const ticker = [
   ["Plywood 18mm", "₹92", "+1.3%"],
 ];
 
-const chapters = [
-  {
-    n: "01",
-    title: "Discover",
-    body: "A living index of material prices, updated through the day from suppliers who actually deliver.",
-  },
-  {
-    n: "02",
-    title: "Decide",
-    body: "Compare landed cost, lead time and grade side by side. No calls, no chasing, no guesswork.",
-  },
-  {
-    n: "03",
-    title: "Deliver",
-    body: "Place the order and follow it to site — dispatch, weighbridge, gate entry, all in one thread.",
-  },
-];
+const whyChooseUs = {
+  buyer: [
+    {
+      icon: Tag,
+      title: "Get lower price",
+      body: "Benchmark live rates across verified suppliers and secure quotes at least 1% below prevailing market prices.",
+    },
+    {
+      icon: Sparkles,
+      title: "AI Assisted Orders",
+      body: "Let our engine recommend the right grade, quantity and reorder point based on your project schedule and burn rate.",
+    },
+    {
+      icon: BarChart3,
+      title: "Comprehensive reports",
+      body: "Track spend, price variance, supplier performance and site-wise consumption in one clean dashboard.",
+    },
+    {
+      icon: Building2,
+      title: "Multibrand / Multicity",
+      body: "Source cement, steel, aggregates and finishes from multiple brands, delivered to any site across India.",
+    },
+  ],
+  supplier: [
+    {
+      icon: Users,
+      title: "Get verified buyers",
+      body: "Access a curated network of contractors and developers actively buying construction materials every day.",
+    },
+    {
+      icon: Wallet,
+      title: "Get paid faster",
+      body: "Reduce working-capital stress with predictable payment cycles and invoice financing built for suppliers.",
+    },
+    {
+      icon: MapPin,
+      title: "Pan India & Global",
+      body: "Expand beyond your local market with logistics and fulfillment support across India and select export corridors.",
+    },
+    {
+      icon: Layers,
+      title: "Multi Brand SKUs",
+      body: "List your full catalogue — TMT, cement, blocks, sand, plywood and more — in one integrated marketplace.",
+    },
+  ],
+};
 
 function Index() {
   return (
