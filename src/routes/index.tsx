@@ -210,22 +210,55 @@ function Index() {
         </div>
       </section>
 
-      {/* Chapters */}
-      <section className="mx-auto max-w-7xl px-6 py-28 md:px-10 md:py-40">
-        <h2 className="max-w-3xl text-[clamp(2rem,4.5vw,3.75rem)] leading-[1.05]">
-          Three movements, from enquiry to gate entry.
-        </h2>
-        <div className="mt-20 grid gap-px overflow-hidden rounded-4xl border border-border/60 bg-border/60 md:grid-cols-3">
-          {chapters.map((c) => (
-            <article
-              key={c.n}
-              className="group bg-background p-10 transition-colors duration-500 hover:bg-card md:p-12"
-            >
-              <span className="text-xs tracking-[0.3em] text-primary">{c.n}</span>
-              <h3 className="mt-8 text-3xl">{c.title}</h3>
-              <p className="mt-4 leading-relaxed text-muted-foreground">{c.body}</p>
-            </article>
-          ))}
+      {/* Why choose us */}
+      <section className="relative overflow-hidden bg-cream-foreground/5 py-28 md:py-40">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-40"
+          style={{
+            background:
+              "radial-gradient(90% 70% at 10% 20%, oklch(0.42 0.09 62 / 25%), transparent 55%)",
+          }}
+        />
+        <div className="relative mx-auto max-w-7xl px-6 md:px-10">
+          <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
+            <div>
+              <p className="text-xs uppercase tracking-[0.35em] text-primary">Why Buildohub</p>
+              <h2 className="mt-4 max-w-2xl text-[clamp(2rem,4.5vw,3.75rem)] leading-[1.05]">
+                Built for buyers. Built for suppliers.
+              </h2>
+            </div>
+            <div className="flex rounded-full border border-border/60 bg-background/60 p-1 backdrop-blur-md">
+              {(["buyer", "supplier"] as const).map((r) => (
+                <button
+                  key={r}
+                  onClick={() => setRole(r)}
+                  aria-pressed={role === r}
+                  className={`rounded-full px-6 py-2.5 text-sm font-medium capitalize transition-all duration-300 ${
+                    role === r
+                      ? "bg-primary text-primary-foreground shadow-lg"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {r}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {activeCards.map(({ icon: Icon, title, body }) => (
+              <article
+                key={title}
+                className="group rounded-3xl border border-border/60 bg-background/60 p-8 backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:border-primary/30 hover:bg-card"
+              >
+                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-border/60 bg-background transition-colors duration-500 group-hover:border-primary/40 group-hover:bg-primary/10">
+                  <Icon className="h-6 w-6 text-primary" aria-hidden />
+                </div>
+                <h3 className="mt-8 text-2xl leading-tight">{title}</h3>
+                <p className="mt-3 leading-relaxed text-muted-foreground">{body}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
