@@ -1,5 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Search } from "lucide-react";
+import { useState } from "react";
+import {
+  BarChart3,
+  Building2,
+  Layers,
+  MapPin,
+  Search,
+  Sparkles,
+  Tag,
+  Truck,
+  Users,
+  Wallet,
+} from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import materialsImg from "@/assets/materials.jpg";
 
