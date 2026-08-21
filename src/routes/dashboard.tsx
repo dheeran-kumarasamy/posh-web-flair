@@ -22,14 +22,14 @@ export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
 });
 
-const market = [
+const market: [string, string, string][] = [
   ["TMT Steel Fe-500D", "₹62,400 / T", "+1.2%"],
   ["OPC Cement 53G", "₹380 / bag", "-0.5%"],
   ["River Sand", "₹1,800 / cum", "+0.8%"],
   ["AAC Blocks", "₹3,200 / cum", "-0.4%"],
 ];
 
-const attention = [
+const attention: [string, string, string][] = [
   ["Quotes awaiting review", "3 suppliers quoted TMT Fe-500D for Whitefield", "Review"],
   ["Price movement", "Cement is 2.4% below your target of ₹390", "See intelligence"],
   ["Delivery today", "BH-4802 · M-Sand at weighbridge, Hebbal", "Track"],
